@@ -9,14 +9,31 @@ const BoxShadowGenerator = () => {
   const [colour, setColour] = useState<string>("#000000");
   const [opacity, setOpacity] = useState<number>(0.5);
   const [inset, setInset] = useState<boolean>(false);
+  const [colourBox, setColourBox] = useState<string>("#808080");
   const [boxShadow, setBoxShadow] = useState<string>("");
 
-  console.log(opacity);
+  useEffect(() => {
+    const rgbaValue = hexToRgb(colour, opacity);
+    const boxShadowValue = `${rgbaValue} ${horizontal}px ${vertical}px ${blur}px ${spread}px ${
+      inset ? "inset" : ""
+    }`;
+    console.log(opacity);
+    console.log(boxShadow);
+    setBoxShadow(boxShadowValue);
+  }, [horizontal, vertical, blur, spread, colour, opacity, inset]);
+
+  const hexToRgb = (hex: string, opacity: number): string => {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+
+    return `rgba(${r}, ${g}, ${b}, ${opacity})`;
+  };
 
   return (
     <div
       id="box_shadow_generator"
-      className="p-6 bg-white rounded-lg shadow-md"
+      className="p-6 bg-white rounded-lg shadow-md flex"
     >
       <div id="controls_container" className="space-y-4">
         <h2 className="text-lg">Box Shadow Settings</h2>
@@ -77,7 +94,7 @@ const BoxShadowGenerator = () => {
               type="range"
               name="blur"
               id="blur"
-              min="-75"
+              min="0"
               max="100"
             />
           </div>
@@ -118,7 +135,7 @@ const BoxShadowGenerator = () => {
         </div>
         <div className="form_control">
           <div className="range_input">
-            <label htmlFor="colour">Colour:</label>
+            <label htmlFor="colour">Shadow colour:</label>
             <input
               onChange={(event) => setColour(event.target.value)}
               value={colour}
@@ -187,8 +204,8 @@ const BoxShadowGenerator = () => {
         <h2 className="text-xl">Preview of the generated effect:</h2>
         <div
           id="box"
-          className="mt-6 w-32 h-32 bg-gray-300 rounded"
-          style={{ boxShadow }}
+          className="mt-6 w-32 h-32 rounded"
+          style={{ boxShadow, backgroundColor: "" }}
         ></div>
       </div>
       <div
