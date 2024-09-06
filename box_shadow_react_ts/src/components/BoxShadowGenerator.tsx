@@ -119,6 +119,18 @@ const BoxShadowGenerator = () => {
           </div>
         </div>
       </div>
+      <div id="preview">
+        <h2>Preview of the generated effect:</h2>
+        <div id="box"></div>
+      </div>
+      <div id="generated_rule">
+        <h2>Copy and Paste</h2>
+        <div id="rules_area">
+            <div id="rule">box-shadow: <span></span>;</div>
+            <div id="webkit_rule">-webkit-box-shadow: <span></span>;</div>
+            <div id="moz_rule">-moz-box-shadow: <span></span>;</div>
+        </div>
+      </div>
     </div>
   );
 };
