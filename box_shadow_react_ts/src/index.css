@@ -5,3 +5,22 @@
 * {
   font-family: "Rubik";
 }
+
+.form_control {
+  @apply flex gap-4;
+}
+
+.reference_input input[type="text"] {
+  @apply w-7;
+}
+
+#boxColour,
+#inset_value,
+#colour_value,
+#colourBox_value {
+  @apply w-20;
+}
+
+.reference_input {
+  @apply flex;
+}
